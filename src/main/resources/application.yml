@@ -15,8 +15,8 @@ spring:
     name: shiro
   datasource:
     username: root
-    password: jacques
-    url: jdbc:mysql://129.204.232.85:13306/common?characterEncoding=utf-8
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/common?characterEncoding=utf-8
     driver-class-name: com.mysql.jdbc.Driver
   jackson:
     time-zone: GMT+8
@@ -36,12 +36,12 @@ mybatis:
     map-underscore-to-camel-case: true
 
 custom:
-  md5Salt: jacques
+  md5Salt: qweqweqw
   redisExpire: 7200
 
 #自定义设置
 option:
-  filePath: /usr/share/nginx/server/JacquesFry/static/file/ #文件存放地址
+  filePath: D:/static/file/ #文件存放地址
   fileUrl: /file/ #网页url前缀
 
 

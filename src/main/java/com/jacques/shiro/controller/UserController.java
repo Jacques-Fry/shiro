@@ -50,7 +50,6 @@ public class UserController {
     return new Result(true,StatusCode.OK,"退出成功");
   }
 
-
   //  @RequiresRoles() 访问此方法必备角色
   //  @RequiresPermissions() 访问此方法必备权限
   @SqlLog(operationName = "访问用户home",operation = "user:home")
