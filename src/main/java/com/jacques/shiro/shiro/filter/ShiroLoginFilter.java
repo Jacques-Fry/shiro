@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jacques.shiro.entity.Result;
 import com.jacques.shiro.entity.StatusCode;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

@@ -69,7 +69,6 @@ public class ExcelExportUtil<T> {
      * 基于注解导出
      */
     public void export(HttpServletResponse response,InputStream is, List<T> objs,String fileName) throws Exception {
-
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         Sheet sheet = workbook.getSheetAt(0);
 

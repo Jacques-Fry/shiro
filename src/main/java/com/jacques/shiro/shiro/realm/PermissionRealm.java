@@ -103,6 +103,7 @@ public class PermissionRealm extends AuthorizingRealm {
     //4.比较密码和数据库中的密码是否一致（密码可能需要加密）
     if (user != null && StringUtils.equals(password, user.getPassword())) {
       //5.如果成功，向shiro存入安全数据
+      user.setUsername(username);
       SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, this.getName());//1.安全数据，2.密码。3。当前realm域名称
       return info;
     } else {

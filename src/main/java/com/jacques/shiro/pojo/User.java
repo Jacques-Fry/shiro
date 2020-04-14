@@ -12,12 +12,11 @@ import java.util.Date;
  */
 public class User implements Serializable,AuthCachePrincipal{
   @ExcelAttribute(sort = 0)
-  private String id;
+  private long id;
   @ExcelAttribute(sort = 1)
   private String username;
-  @ExcelAttribute(sort = 2)
   private String password;
-  @ExcelAttribute(sort = 3)
+  @ExcelAttribute(sort = 2)
   private String tel;
   private Date createTime;
   private String status;
@@ -26,11 +25,11 @@ public class User implements Serializable,AuthCachePrincipal{
   public User() {
   }
 
-  public String getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(long id) {
     this.id = id;
   }
 

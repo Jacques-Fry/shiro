@@ -6,6 +6,7 @@ import com.jacques.shiro.utils.StatusUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authz.AuthorizationException;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -31,7 +32,7 @@ public class CommonExceptionHandler {
   @ExceptionHandler(value = {Exception.class})
   public Result exception(Exception e) {
     logger.error("ExceptionTest Exception:",e);
-    return new Result(false, StatusUtil.ERROR,"程序错误");
+    return new Result(false, StatusUtil.ERROR,"系统繁忙,请稍后再试");
   }
 
 }

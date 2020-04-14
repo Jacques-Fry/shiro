@@ -1,13 +1,10 @@
 package com.jacques.shiro.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author 花落泪知雨
  * @create 2019/8/26
  */
-public class StatusUtil {
+public final class StatusUtil {
   public static final int OK = 200;//成功
   public static final int ERROR = 500;//程序未知错误
 

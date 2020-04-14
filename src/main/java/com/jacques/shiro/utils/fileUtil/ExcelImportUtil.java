@@ -41,7 +41,7 @@ public class ExcelImportUtil<T> {
             for (int rowNum = rowIndex; rowNum <= sheet.getLastRowNum(); rowNum++) {
                 Row row = sheet.getRow(rowNum);
                 entity = (T) clazz.newInstance();
-                System.out.println(row.getLastCellNum());
+//                System.out.println(row.getLastCellNum());
                 for (int j = cellIndex; j < row.getLastCellNum(); j++) {
                     Cell cell = row.getCell(j);
                     for (Field field : fields) {

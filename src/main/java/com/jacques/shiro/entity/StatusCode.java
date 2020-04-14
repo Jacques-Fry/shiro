@@ -5,8 +5,8 @@ package com.jacques.shiro.entity;
  */
 public class StatusCode {
 
-  public static final int OK = 200;//成功
-  public static final int ERROR = 500;// 失败
+  public static final int OK = 200;// 执行成功
+  public static final int ERROR = 500;// 执行失败
 
   public static final int PARAMERROR = 4000;// 参数错误
 
