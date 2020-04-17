@@ -52,7 +52,7 @@ public class UserService {
       //调用登陆
       subject.login(upToken);
 
-      return new Result(true, StatusCode.OK, "登陆成功: ", sid);
+      return new Result(true, StatusCode.OK, "登陆成功", sid);
     } catch (Exception e) {
       return new Result(true, StatusCode.OK, "用户名或密码错误");
     }

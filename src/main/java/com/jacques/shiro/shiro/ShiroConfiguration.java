@@ -61,6 +61,7 @@ public class ShiroConfiguration {
     //4.设置过滤器集合
     Map<String, String> map = new LinkedHashMap<>();
     map.put("/user/login", "anon");
+    map.put("/user/logout","authc");
     map.put("/noLogin", "anon");
     map.put("/noAuth", "anon");
 //    map.put("/**", "authc");

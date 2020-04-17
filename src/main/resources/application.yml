@@ -36,12 +36,12 @@ mybatis:
     map-underscore-to-camel-case: true
 
 custom:
-  md5Salt: qweqweqw
+  md5Salt: jacques
   redisExpire: 7200
 
 #自定义设置
 option:
-  filePath: D:/static/file/ #文件存放地址
+  filePath: /usr/share/nginx/server/JacquesFry/static/file/ #文件存放地址
   fileUrl: /file/ #网页url前缀
 
 

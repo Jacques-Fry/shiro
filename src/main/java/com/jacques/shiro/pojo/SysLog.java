@@ -15,6 +15,7 @@ public class SysLog {
     private long time;
     private String method;
     private String params;
+    private String result;
     private String ip;
     private Date createTime;
 
@@ -93,6 +94,14 @@ public class SysLog {
         this.ip = ip;
     }
 
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -103,28 +112,18 @@ public class SysLog {
 
     @Override
     public String toString() {
-        return "{\"SysLog\":{"
-                + "\"id\":"
-                + id
-                + ",\"name\":\""
-                + name + '\"'
-                + ",\"UserId\":"
-                + UserId
-                + ",\"username\":\""
-                + username + '\"'
-                + ",\"operation\":\""
-                + operation + '\"'
-                + ",\"time\":"
-                + time
-                + ",\"method\":\""
-                + method + '\"'
-                + ",\"params\":\""
-                + params + '\"'
-                + ",\"ip\":\""
-                + ip + '\"'
-                + ",\"createTime\":\""
-                + createTime + '\"'
-                + "}}";
-
+        return "SysLog{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", UserId='" + UserId + '\'' +
+                ", username='" + username + '\'' +
+                ", operation='" + operation + '\'' +
+                ", time=" + time +
+                ", method='" + method + '\'' +
+                ", params='" + params + '\'' +
+                ", result='" + result + '\'' +
+                ", ip='" + ip + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }

@@ -23,6 +23,7 @@ public interface SysLogDao {
             "`time`," +
             "`method`," +
             "`params`," +
+            "`result`," +
             "`ip`," +
             "`create_time`" +
             ")" +
@@ -36,6 +37,7 @@ public interface SysLogDao {
             "#{sysLog.time}," +
             "#{sysLog.method}," +
             "#{sysLog.params}," +
+            "#{sysLog.result}," +
             "#{sysLog.ip}," +
             "#{sysLog.createTime}" +
             ");")

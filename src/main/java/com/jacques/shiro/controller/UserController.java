@@ -1,5 +1,6 @@
 package com.jacques.shiro.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.jacques.shiro.entity.Result;
 import com.jacques.shiro.entity.StatusCode;
 import com.jacques.shiro.log.sql.SqlLog;
@@ -8,19 +9,16 @@ import com.jacques.shiro.service.UserService;
 import com.jacques.shiro.utils.fileUtil.ExcelExportUtil;
 import com.jacques.shiro.utils.fileUtil.ExcelImportUtil;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -30,6 +28,7 @@ import java.util.List;
  * @author Jack_YD
  * @create 2019/12/23 16:03
  */
+@EnableAutoConfiguration
 @RestController
 @RequestMapping("/user")
 public class UserController {
