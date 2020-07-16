@@ -4,25 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jacques.shiro.dao.UserDao;
 import com.jacques.shiro.entity.Result;
-import com.jacques.shiro.entity.StatusCode;
 import com.jacques.shiro.handler.CommonException;
 import com.jacques.shiro.pojo.User;
-import com.jacques.shiro.utils.IdWorker;
+import com.jacques.shiro.utils.WebStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -76,9 +70,9 @@ public class UserService {
             //调用登陆
             subject.login(upToken);
 
-            return new Result(true, StatusCode.OK, "登陆成功", sid);
+            return new Result("登陆成功", sid);
         } catch (Exception e) {
-            return new Result(true, StatusCode.OK, "用户名或密码错误");
+            return new Result( "用户名或密码错误");
         }
     }
 
@@ -104,15 +98,15 @@ public class UserService {
 //      if (StringUtils.isBlank(u.getId()))
 //        throw new CommonException(StatusCode.OK, "有数据的ID值为空，导入失败，在第" + count + "行");
             if (userDao.countById(u.getId()) > 0)
-                throw new CommonException(StatusCode.OK, "有ID被使用，导入失败，ID值为:" + u.getId() + "，在第" + count + "行");
+                throw new CommonException(WebStatus.OK, "有ID被使用，导入失败，ID值为:" + u.getId() + "，在第" + count + "行");
             if (StringUtils.isBlank(u.getUsername()))
-                throw new CommonException(StatusCode.OK, "有数据的用户名为空，导入失败，在第" + count + "行");
+                throw new CommonException(WebStatus.OK, "有数据的用户名为空，导入失败，在第" + count + "行");
             if (userDao.countByUsername(u.getUsername()) > 0)
-                throw new CommonException(StatusCode.OK, "有用户名被使用，导入失败，用户名为:" + u.getUsername() + "，在第" + count + "行");
+                throw new CommonException(WebStatus.OK, "有用户名被使用，导入失败，用户名为:" + u.getUsername() + "，在第" + count + "行");
             if (StringUtils.isBlank(u.getTel()))
-                throw new CommonException(StatusCode.OK, "有数据的手机号码为空，导入失败，在第" + count + "行");
+                throw new CommonException(WebStatus.OK, "有数据的手机号码为空，导入失败，在第" + count + "行");
             if (userDao.countByTel(u.getTel()) > 0)
-                throw new CommonException(StatusCode.OK, "有手机号码被使用，导入失败，手机号为:" + u.getTel() + "，在第" + count + "行");
+                throw new CommonException(WebStatus.OK, "有手机号码被使用，导入失败，手机号为:" + u.getTel() + "，在第" + count + "行");
             count++;
         }
 

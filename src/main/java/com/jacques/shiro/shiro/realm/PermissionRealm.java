@@ -1,34 +1,27 @@
 package com.jacques.shiro.shiro.realm;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jacques.shiro.entity.StatusCode;
 import com.jacques.shiro.handler.CommonException;
 import com.jacques.shiro.pojo.User;
 import com.jacques.shiro.service.PermissionService;
 import com.jacques.shiro.service.RoleService;
 import com.jacques.shiro.service.UserService;
+import com.jacques.shiro.utils.WebStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.mgt.SubjectDAO;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * 自定义realms对象
@@ -71,10 +64,10 @@ public class PermissionRealm extends AuthorizingRealm {
         //2.根据id或者名称查询用户
         user = userService.findById(user.getId());
         if (user == null) {
-            throw new CommonException(StatusCode.ERROR, "账号数据不存在");
+            throw new CommonException(WebStatus.ERROR, "账号数据不存在");
         }
         if ("1".equals(user.getStatus())) {
-            throw new CommonException(StatusCode.FREEZE, "您的账号已被冻结");
+            throw new CommonException(WebStatus.FREEZE, "您的账号已被冻结");
         }
         Integer roleId = user.getRoleId();
 
@@ -108,7 +101,7 @@ public class PermissionRealm extends AuthorizingRealm {
         //3.根据用户名查询数据库，正式系统查询
         User user = userService.findByUsername(username);
         if ("1".equals(user.getStatus())) {
-            throw new CommonException(StatusCode.FREEZE, "您的账号已被冻结");
+            throw new CommonException(WebStatus.FREEZE, "您的账号已被冻结");
         }
         //4.比较密码和数据库中的密码是否一致（密码可能需要加密）
         if (StringUtils.equals(password, user.getPassword())) {
@@ -120,7 +113,7 @@ public class PermissionRealm extends AuthorizingRealm {
             return info;
         } else {
             //6.失败，抛出异常或返回null
-            throw new CommonException(StatusCode.USERERROR, "用户名或密码错误");
+            throw new CommonException(WebStatus.USERERROR, "用户名或密码错误");
         }
     }
 

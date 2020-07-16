@@ -2,9 +2,8 @@ package com.jacques.shiro.shiro.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jacques.shiro.entity.Result;
-import com.jacques.shiro.entity.StatusCode;
+import com.jacques.shiro.utils.WebStatus;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.springframework.context.annotation.ComponentScan;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -43,7 +42,7 @@ public class ShiroLoginFilter extends FormAuthenticationFilter{
     httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
     httpServletResponse.setCharacterEncoding("UTF-8");
     httpServletResponse.setContentType("application/json");
-    httpServletResponse.getWriter().write(JSONObject.toJSON(new Result(false, StatusCode.TOKENERROR, "未登录")).toString());
+    httpServletResponse.getWriter().write(JSONObject.toJSON(new Result(WebStatus.TOKENERROR, "未登录")).toString());
     return false;
   }
 }

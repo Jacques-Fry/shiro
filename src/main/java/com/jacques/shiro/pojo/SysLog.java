@@ -1,12 +1,13 @@
 package com.jacques.shiro.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Jack_YD
  * @create 2020/4/13 8:45
  */
-public class SysLog {
+public class SysLog implements Serializable{
     private long id;
     private String name;
     private String UserId;

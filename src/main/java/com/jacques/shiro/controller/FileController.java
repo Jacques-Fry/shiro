@@ -2,7 +2,7 @@ package com.jacques.shiro.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.jacques.shiro.entity.Result;
-import com.jacques.shiro.entity.StatusCode;
+import com.jacques.shiro.utils.WebStatus;
 import com.jacques.shiro.utils.fileUtil.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +35,10 @@ public class FileController {
     String pathName = fileName.substring(fileName.lastIndexOf(".") + 1) + "/" + FileUtils.getFileName(fileName);
 
     if (!FileUtils.upload(file, filePath + pathName)) {
-      return new Result(false, StatusCode.ERROR, "文件上传错误");
+      return new Result(WebStatus.ERROR, "文件上传错误");
     }
 
-    return new Result(true, StatusCode.OK, "文件上传成功", JSON.parse("{\"url\":\"" + fileUrl + pathName + "\"}"));
+    return new Result( "文件上传成功", JSON.parse("{\"url\":\"" + fileUrl + pathName + "\"}"));
   }
 
   @GetMapping("download")

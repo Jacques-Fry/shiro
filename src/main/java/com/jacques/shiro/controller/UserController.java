@@ -1,7 +1,6 @@
 package com.jacques.shiro.controller;
 
 import com.jacques.shiro.entity.Result;
-import com.jacques.shiro.entity.StatusCode;
 import com.jacques.shiro.log.sql.SqlLog;
 import com.jacques.shiro.pojo.User;
 import com.jacques.shiro.service.UserService;
@@ -43,12 +42,12 @@ public class UserController {
     public Result logout() {
         Subject lvSubject = SecurityUtils.getSubject();
         lvSubject.logout();
-        return new Result(true, StatusCode.OK, "退出成功");
+        return new Result("退出成功");
     }
 
     @PostMapping("queryList")
     public Result queryList(@RequestBody(required = false) User user, @RequestParam int pageNum, @RequestParam int pageSize) {
-        return new Result(true, StatusCode.OK, "查询成功", userService.queryList(user, pageNum, pageSize));
+        return new Result( "查询成功", userService.queryList(user, pageNum, pageSize));
     }
 
 
@@ -56,7 +55,7 @@ public class UserController {
     @RequiresPermissions("user:upd")
     @GetMapping("upd")
     public Result upd() {
-        return new Result(true, StatusCode.OK, "访问upd成功");
+        return new Result( "访问upd成功");
     }
 
     //  @RequiresRoles("system")
@@ -64,11 +63,11 @@ public class UserController {
     @PostMapping("import")
     public Result importUser(MultipartFile file) throws IOException {
         if (file == null) {
-            return new Result(false, StatusCode.PARAMERROR, "未传入文件");
+            return new Result("未传入文件");
         }
         List<User> userList = new ExcelImportUtil<User>(User.class).readExcel(file.getInputStream(), 1, 0);
         userService.saveUserList(userList);
-        return new Result(true, StatusCode.OK, "导入成功");
+        return new Result( "导入成功");
     }
 
     @SqlLog(operationName = "导出用户数据", operation = "user:export")
