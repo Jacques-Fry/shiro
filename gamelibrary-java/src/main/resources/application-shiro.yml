@@ -1,0 +1,11 @@
+custom:
+  md5Salt: jacques
+  redisExpire: 7200
+
+shiro:
+  auth:
+    anon:
+      /user/login,/noLogin,/noAuth
+    authc:
+      /user/logout
+    #,/user/**,/permission/**,/role/**,/syslog/**

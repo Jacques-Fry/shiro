@@ -1,0 +1,10 @@
+spring:
+  datasource:
+      username: root
+      password: jacques
+      url: jdbc:mysql://129.204.232.85:13306/common?characterEncoding=utf-8
+      driver-class-name: com.mysql.jdbc.Driver
+  redis:
+      host: 129.204.232.85
+      database: 4
+      port: 6379
