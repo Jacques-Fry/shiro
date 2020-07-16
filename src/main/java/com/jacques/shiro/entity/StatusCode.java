@@ -9,6 +9,7 @@ public class StatusCode {
   public static final int ERROR = 500;// 执行失败
 
   public static final int PARAMERROR = 4000;// 参数错误
+  public static final int NOTEXSITS = 4004;//数据不存在
 
   public static final int TOKENERROR = 6000;// token过期或无效/未登录
   public static final int USERERROR = 6001;// 用户名或密码错误

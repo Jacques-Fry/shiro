@@ -1,9 +1,10 @@
 package com.jacques.shiro.utils.fileUtil;
 
+import com.jacques.shiro.handler.CommonException;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.UUID;
 
 /**
@@ -65,4 +66,26 @@ public class FileUtils {
     }
 
   }
+
+  public static void download(String filepath, HttpServletResponse res) {
+    // 发送给客户端的数据
+    OutputStream outputStream = null;
+    try {
+      outputStream = res.getOutputStream();
+      byte[] buff = new byte[1024];
+      BufferedInputStream bis = null;
+      // 读取filename
+      bis = new BufferedInputStream(new FileInputStream(new File(filepath)));
+      int i = bis.read(buff);
+      while (i != -1) {
+        outputStream.write(buff, 0, buff.length);
+        outputStream.flush();
+        i = bis.read(buff);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw new CommonException(500, "文件下载出错");
+    }
+  }
+
 }

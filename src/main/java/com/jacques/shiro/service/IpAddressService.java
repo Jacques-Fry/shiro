@@ -24,7 +24,7 @@ public final class IpAddressService {
 
         private static Logger logger = LoggerFactory.getLogger(IpAddressService.class);
 
-        private static String dbPath="D:/Tools/GeoLite2-City.mmdb";
+        private static String dbPath="/usr/share/nginx/html/static/GeoLite2-City.mmdb";
         // C:/Users/TS-B-SYH/Desktop/dev/GeoLite2-City.mmdb
         //  /usr/share/nginx/common/GeoLite2-City.mmdb
 

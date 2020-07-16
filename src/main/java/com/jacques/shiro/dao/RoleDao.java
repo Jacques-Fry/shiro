@@ -1,11 +1,14 @@
 package com.jacques.shiro.dao;
 
+import com.jacques.shiro.pojo.Role;
+import com.jacques.shiro.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @author Jack_YD
@@ -21,4 +24,13 @@ public interface RoleDao {
       "  `role` r " +
       "WHERE r.id=#{id}")
   HashSet<String> findById(@Param("id") Integer id);
+
+  @Select("SELECT " +
+          "`id` ," +
+          "`name`," +
+          "`nickname`" +
+          "FROM `role` " +
+          "WHERE `name` LIKE IFNULL(CONCAT('%',#{role.name},'%'),'%') " +
+          "AND `nickname` LIKE IFNULL(CONCAT('%',#{role.nickname},'%'),'%') ")
+  List<Role> queryList(@Param("role") Role role, int pageNum, int pageSize);
 }

@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * @author Jack_YD
@@ -45,6 +45,11 @@ public class ShiroConfiguration {
     return securityManager;
   }
 
+  @Value("${shiro.auth.anon}")
+  private String[] anons;
+  @Value("${shiro.auth.authc}")
+  private String[] authcs;
+
   //3.配置shiro的过滤器工厂
   @Bean
   public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
@@ -60,11 +65,12 @@ public class ShiroConfiguration {
 //    filterFactory.setUnauthorizedUrl("/noAuth");
     //4.设置过滤器集合
     Map<String, String> map = new LinkedHashMap<>();
-    map.put("/user/login", "anon");
-    map.put("/user/logout","authc");
-    map.put("/noLogin", "anon");
-    map.put("/noAuth", "anon");
-//    map.put("/**", "authc");
+    for (String anon : anons) {
+      map.put(anon, "anon");
+    }
+    for (String anon : authcs) {
+      map.put(anon, "authc");
+    }
     //map.put("/user/home","perms[user:home]");//是否具备权限,建议使用注解
 
     filterFactory.setFilterChainDefinitionMap(map);

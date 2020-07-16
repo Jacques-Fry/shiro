@@ -1,0 +1,5 @@
+#自定义设置
+option:
+  filePath: E:/test/static/file/ #文件存放地址
+  fileUrl: /file/ #网页url前缀
+  static: /usr/share/nginx/html/static

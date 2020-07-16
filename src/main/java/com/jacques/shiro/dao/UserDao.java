@@ -20,7 +20,8 @@ public interface UserDao {
     @Select("SELECT " +
             "  `id`," +
             "  `password`," +
-            "  `status` " +
+            "  `status`, " +
+            "  `role_id` " +
             "FROM" +
             "  `user`  " +
             "WHERE `username` = #{username}")
@@ -45,6 +46,20 @@ public interface UserDao {
             "FROM" +
             "  `user`  ")
     List<User> findAll();
+
+
+    @Select("SELECT " +
+            "`id` , " +
+            "`username`, " +
+            "`tel` , " +
+            "`create_time` , " +
+            "`status` , " +
+            "`role_id`" +
+            "FROM `user`" +
+            "WHERE username LIKE IFNULL(CONCAT('%',#{user.username},'%'),'%')" +
+            "AND tel LIKE IFNULL(CONCAT('%',#{user.tel},'%'),'%')" +
+            "AND role_id LIKE IFNULL(CONCAT('%',#{user.roleId},'%'),'%')")
+    List<User> queryList(@Param("user") User user,int pageNum,int pageSize);
 
     @Select("SELECT " +
             "  count(`id`) " +

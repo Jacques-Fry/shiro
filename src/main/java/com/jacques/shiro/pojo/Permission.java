@@ -8,6 +8,7 @@ public class Permission implements Serializable{
 	private Integer id;
 	private String url;
 	private String name;
+	private String nickname;
 	public Integer getId() {
 		return id;
 	}
@@ -23,9 +24,16 @@ public class Permission implements Serializable{
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 }

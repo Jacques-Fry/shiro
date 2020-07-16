@@ -4,7 +4,10 @@ import com.jacques.shiro.pojo.SysLog;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author Jack_YD
@@ -42,4 +45,22 @@ public interface SysLogDao {
             "#{sysLog.createTime}" +
             ");")
     void saveSysLog(@Param("sysLog") SysLog sysLog);
+    
+    @Select("SELECT" +
+            "`id` ," +
+            "`name` ," +
+            "`user_id` ," +
+            "`username` ," +
+            "`operation` ," +
+            "`time` ," +
+            "`method` ," +
+            "`params` ," +
+            "`result` ," +
+            "`ip` ," +
+            "`create_time` " +
+            "FROM `sys_log`"+
+            "WHERE `name` LIKE IFNULL(CONCAT('%',#{sysLog.name},'%'),'%') " +
+            "AND `username` LIKE IFNULL(CONCAT('%',#{sysLog.username},'%'),'%') "+
+            "AND `ip` LIKE IFNULL(CONCAT('%',#{sysLog.ip},'%'),'%') ")
+    List<SysLog> queryList(@Param("sysLog") SysLog sysLog, int pageNum, int pageSize);
 }

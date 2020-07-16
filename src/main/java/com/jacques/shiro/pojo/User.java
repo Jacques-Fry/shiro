@@ -18,9 +18,9 @@ public class User implements Serializable,AuthCachePrincipal{
   private String password;
   @ExcelAttribute(sort = 2)
   private String tel;
-  private Date createTime;
   private String status;
   private Integer roleId;
+  private Date createTime;
 
   public User() {
   }

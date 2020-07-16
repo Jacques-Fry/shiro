@@ -8,40 +8,57 @@ server:
     enabled: true #G压缩
     mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,application/x-css,text/css
     min-response-size: 10240 #10kb以下忽略
+
 spring:
+  profiles:
+    include: shiro,option,db
   banner:
     charset: UTF-8
   application:
     name: shiro
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://127.0.0.1:3306/common?characterEncoding=utf-8
-    driver-class-name: com.mysql.jdbc.Driver
   jackson:
     time-zone: GMT+8
     serialization:
       write-dates-as-timestamps: true
     default-property-inclusion: non_null
-  redis:
-    host: 127.0.0.1
-    database: 2
-    port: 6379
   transaction:
     rollback-on-commit-failure: true
+  servlet:
+    multipart:
+      # 开启 multipart 上传功能
+      enabled: true
+      # 文件写入磁盘的阈值
+      file-size-threshold: 2KB
+      # 最大文件大小1G
+      max-file-size: 1024MB
+      # 最大请求大小1G
+      max-request-size: 1024MB
+  #静态映射
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${option.static}/
+
+#log日志
 logging:
   config: classpath:log4j2.yml
+
+#mybatis配置
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+  type-aliases-package: com.jacques.shiro.pojo
+  mapper-locations: classpath:/mapper/*Mapper.xml
 
-custom:
-  md5Salt: jacques
-  redisExpire: 7200
+#分页插件
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
 
-#自定义设置
-option:
-  filePath: /usr/share/nginx/server/JacquesFry/static/file/ #文件存放地址
-  fileUrl: /file/ #网页url前缀
+
+
+
+
+
 
 

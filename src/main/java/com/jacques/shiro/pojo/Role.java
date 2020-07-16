@@ -7,7 +7,7 @@ public class Role implements Serializable{
 	private static final long serialVersionUID = -227437593919820521L;
 	private Integer id;
 	private String name;
-	private String memo;
+	private String nickname;
 	public Integer getId() {
 		return id;
 	}
@@ -20,13 +20,12 @@ public class Role implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getMemo() {
-		return memo;
+
+	public String getNickname() {
+		return nickname;
 	}
-	public void setMemo(String memo) {
-		this.memo = memo;
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
-	
-	
-	
 }
