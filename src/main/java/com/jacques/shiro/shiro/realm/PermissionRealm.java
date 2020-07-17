@@ -100,6 +100,9 @@ public class PermissionRealm extends AuthorizingRealm {
         String password = new String(upToken.getPassword());
         //3.根据用户名查询数据库，正式系统查询
         User user = userService.findByUsername(username);
+        if(user==null){
+            throw new CommonException(WebStatus.USERERROR,"用户名不存在");
+        }
         if ("1".equals(user.getStatus())) {
             throw new CommonException(WebStatus.FREEZE, "您的账号已被冻结");
         }

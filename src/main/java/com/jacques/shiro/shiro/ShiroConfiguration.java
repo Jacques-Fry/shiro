@@ -102,6 +102,8 @@ public class ShiroConfiguration {
   private String host;
   @Value("${spring.redis.port}")
   private Integer port;
+  @Value("${spring.redis.password}")
+  private String password;
   @Value("${custom.redisExpire}")
   private Integer redisExpire;
 
@@ -110,6 +112,7 @@ public class ShiroConfiguration {
     RedisManager redisManager = new RedisManager();
     redisManager.setHost(host);
     redisManager.setPort(port);
+    redisManager.setPassword(password);
     return redisManager;
   }
 

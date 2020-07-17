@@ -71,8 +71,9 @@ public class UserService {
             subject.login(upToken);
 
             return new Result("登陆成功", sid);
-        } catch (Exception e) {
-            return new Result( "用户名或密码错误");
+        }
+        catch (Exception e) {
+            return new Result( WebStatus.USERERROR,"用户名或密码错误");
         }
     }
 
