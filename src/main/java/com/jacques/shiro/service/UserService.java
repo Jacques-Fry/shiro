@@ -73,7 +73,7 @@ public class UserService {
             return new Result("登陆成功", sid);
         }
         catch (Exception e) {
-            return new Result( WebStatus.USERERROR,"用户名或密码错误");
+            return new Result( WebStatus.USER_ERROR,"用户名或密码错误");
         }
     }
 
@@ -85,6 +85,23 @@ public class UserService {
         PageHelper.startPage(pageNum, pageSize ,orderBy);
         List<User> userList = userDao.queryList(user, pageNum, pageSize);
         return new PageInfo<>(userList);
+    }
+
+    /**
+     * 查询登陆的用户信息
+     */
+    public User getUser() {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        return this.selectDetails(user.getId());
+    }
+
+    /**
+     * 获取用户详情数据
+     */
+    public User selectDetails(long id) {
+        //验证ID
+        verifyId(id);
+        return userDao.selectDetails(id);
     }
 
     /**
@@ -125,5 +142,19 @@ public class UserService {
      */
     public List<User> findAll() {
         return userDao.findAll();
+    }
+
+
+    /**
+     * ID是否存在
+     */
+    public boolean verifyId(long id){
+        if(id==0){
+            throw new CommonException(WebStatus.PARAM_ERROR,"ID不能为空");
+        }
+        if(!userDao.verifyId(id)){
+            throw new CommonException(WebStatus.NOT_EXISTS,"ID不存在");
+        }
+        return true;
     }
 }

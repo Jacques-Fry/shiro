@@ -104,5 +104,7 @@ public interface UserDao {
             "  ) ; ")
     void saveUser(@Param("user") User user);
 
+    User selectDetails(@Param("id") long id);
 
+    boolean verifyId(@Param("id") long id);
 }

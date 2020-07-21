@@ -101,7 +101,7 @@ public class PermissionRealm extends AuthorizingRealm {
         //3.根据用户名查询数据库，正式系统查询
         User user = userService.findByUsername(username);
         if(user==null){
-            throw new CommonException(WebStatus.USERERROR,"用户名不存在");
+            throw new CommonException(WebStatus.USER_ERROR,"用户名不存在");
         }
         if ("1".equals(user.getStatus())) {
             throw new CommonException(WebStatus.FREEZE, "您的账号已被冻结");
@@ -116,7 +116,7 @@ public class PermissionRealm extends AuthorizingRealm {
             return info;
         } else {
             //6.失败，抛出异常或返回null
-            throw new CommonException(WebStatus.USERERROR, "用户名或密码错误");
+            throw new CommonException(WebStatus.USER_ERROR, "用户名或密码错误");
         }
     }
 

@@ -50,6 +50,15 @@ public class UserController {
         return new Result( "查询成功", userService.queryList(user, pageNum, pageSize));
     }
 
+    @GetMapping("details")
+    public Result details(){
+        return new Result( "查询成功", userService.getUser());
+    }
+
+    @GetMapping("selectDetails")
+    public Result selectDetails(@RequestParam(defaultValue = "0")long id){
+        return new Result( "查询成功", userService.selectDetails(id));
+    }
 
     @SqlLog(operationName = "访问用户upd", operation = "user:upd")
     @RequiresPermissions("user:upd")

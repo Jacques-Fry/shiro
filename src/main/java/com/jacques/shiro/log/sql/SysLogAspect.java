@@ -55,7 +55,7 @@ public class SysLogAspect {
         String loginHost=SecurityUtils.getSubject().getSession().getHost();
         //ip不一致令牌无效
         if(!StringUtils.equals(host,loginHost)){
-            throw new CommonException(WebStatus.TOKENERROR,"令牌无效");
+            throw new CommonException(WebStatus.TOKEN_ERROR,"令牌无效");
         }
         //结束时间
         long endTime = System.currentTimeMillis();

@@ -42,7 +42,7 @@ public class ShiroLoginFilter extends FormAuthenticationFilter{
     httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
     httpServletResponse.setCharacterEncoding("UTF-8");
     httpServletResponse.setContentType("application/json");
-    httpServletResponse.getWriter().write(JSONObject.toJSON(new Result(WebStatus.TOKENERROR, "未登录")).toString());
+    httpServletResponse.getWriter().write(JSONObject.toJSON(new Result(WebStatus.TOKEN_ERROR, "未登录")).toString());
     return false;
   }
 }

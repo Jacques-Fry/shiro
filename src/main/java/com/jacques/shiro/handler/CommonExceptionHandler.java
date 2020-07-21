@@ -19,7 +19,7 @@ public class CommonExceptionHandler {
 
   @ExceptionHandler(value = {AuthorizationException.class})
   public Result authorizationException(AuthorizationException e) {
-    return new Result(WebStatus.SYSERROR,"没有权限");
+    return new Result(WebStatus.SYS_ERROR,"没有权限");
   }
 
   @ExceptionHandler(value = {CommonException.class})
