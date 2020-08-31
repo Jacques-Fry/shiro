@@ -1,5 +1,6 @@
 package com.jacques.shiro.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.jacques.shiro.entity.Result;
 import com.jacques.shiro.log.sql.SqlLog;
 import com.jacques.shiro.pojo.User;
@@ -33,50 +34,50 @@ public class UserController {
 
     @SqlLog(operationName = "登录", operation = "user:login")
     @GetMapping("/login")
-    public Result login(String username, String password) {
+    public Result<String> login(String username, String password) {
         return userService.login(username, password);
     }
 
     @SqlLog(operationName = "退出登录", operation = "user:logout")
     @GetMapping("/logout")
-    public Result logout() {
+    public Result<String> logout() {
         Subject lvSubject = SecurityUtils.getSubject();
         lvSubject.logout();
-        return new Result("退出成功");
+        return new Result<>("退出成功");
     }
 
     @PostMapping("queryList")
-    public Result queryList(@RequestBody(required = false) User user, @RequestParam int pageNum, @RequestParam int pageSize) {
-        return new Result( "查询成功", userService.queryList(user, pageNum, pageSize));
+    public Result<PageInfo<User>> queryList(@RequestBody(required = false) User user, @RequestParam int pageNum, @RequestParam int pageSize) {
+        return new Result<>( "查询成功", userService.queryList(user, pageNum, pageSize));
     }
 
     @GetMapping("details")
-    public Result details(){
-        return new Result( "查询成功", userService.getUser());
+    public Result<User> details(){
+        return new Result<>( "查询成功", userService.getUser());
     }
 
     @GetMapping("selectDetails")
-    public Result selectDetails(@RequestParam(defaultValue = "0")long id){
-        return new Result( "查询成功", userService.selectDetails(id));
+    public Result<User> selectDetails(@RequestParam(defaultValue = "0")long id){
+        return new Result<>( "查询成功", userService.selectDetails(id));
     }
 
     @SqlLog(operationName = "访问用户upd", operation = "user:upd")
     @RequiresPermissions("user:upd")
     @GetMapping("upd")
-    public Result upd() {
-        return new Result( "访问upd成功");
+    public Result<String> upd() {
+        return new Result<>( "访问upd成功");
     }
 
     //  @RequiresRoles("system")
     @SqlLog(operationName = "导入用户数据", operation = "user:import")
     @PostMapping("import")
-    public Result importUser(MultipartFile file) throws IOException {
+    public Result<String> importUser(MultipartFile file) throws IOException {
         if (file == null) {
-            return new Result("未传入文件");
+            return new Result<>("未传入文件");
         }
         List<User> userList = new ExcelImportUtil<User>(User.class).readExcel(file.getInputStream(), 1, 0);
         userService.saveUserList(userList);
-        return new Result( "导入成功");
+        return new Result<>( "导入成功");
     }
 
     @SqlLog(operationName = "导出用户数据", operation = "user:export")

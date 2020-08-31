@@ -4,12 +4,12 @@ import com.jacques.shiro.utils.WebStatus;
 
 import java.io.Serializable;
 
-public class  Result implements Serializable {
+public class  Result<T> implements Serializable {
 
     private boolean flag;
     private Integer code;
     private String msg;
-    private Object data;
+    private T data;
 
     public boolean isFlag() {
         return flag;
@@ -35,11 +35,11 @@ public class  Result implements Serializable {
         this.msg = msg;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 
@@ -62,7 +62,7 @@ public class  Result implements Serializable {
         this.msg =msg;
     }
 
-    public Result(String msg,Object data) {
+    public Result(String msg,T data) {
         this.flag = true;
         this.code = WebStatus.OK.getCode();
         this.msg = msg;

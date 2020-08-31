@@ -7,4 +7,4 @@ shiro:
     anon:
       /user/login,/noLogin,/noAuth
     authc:
-      /user/logout
+      /user/**,/permission/**,/role/**,/syslog/**

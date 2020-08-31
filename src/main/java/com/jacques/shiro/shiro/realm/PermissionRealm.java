@@ -126,6 +126,7 @@ public class PermissionRealm extends AuthorizingRealm {
     @Override
     public  boolean isPermitted(PrincipalCollection principals, String permission){
         User user = (User)principals.getPrimaryPrincipal();
+        System.out.println("----"+permission);
         return user.getRoleId()==1||super.isPermitted(principals,permission);
     }
 

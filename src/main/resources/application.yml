@@ -36,6 +36,10 @@ spring:
   #静态映射
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${option.static}/
+#    add-mappings: false #不要为我们工程中的资源文件建立映射
+#  mvc:
+#    throw-exception-if-no-handler-found: true #出现错误时, 直接抛出异常
+
 
 #log日志
 logging:
@@ -54,6 +58,7 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
 
 
 

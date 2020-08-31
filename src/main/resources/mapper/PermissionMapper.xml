@@ -3,7 +3,7 @@
 
 <mapper namespace="com.jacques.shiro.dao.PermissionMapper">
 
-    <select id="findByRoleId" resultType="com.jacques.shiro.pojo.Permission">
+    <select id="findByRoleId" resultType="String">
         select p.name from permission p
         left join role_permission rp on(rp.pid = p.id)
         where rp.rid = #{roleId}
@@ -21,7 +21,7 @@
                   `name` LIKE CONCAT('%',#{permission.name},'%')
               </if>
               <if test="permission.nickname!='' and permission.nickname!=null">
-                  `nickname` LIKE CONCAT('%',#{permission.nickname},'%')
+                  AND `nickname` LIKE CONCAT('%',#{permission.nickname},'%')
               </if>
           </where>
     </select>

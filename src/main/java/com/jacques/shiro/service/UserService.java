@@ -59,7 +59,7 @@ public class UserService {
      * @param password
      * @return
      */
-    public Result login(String username, String password) {
+    public Result<String> login(String username, String password) {
         try {
             //构造登陆令牌
             UsernamePasswordToken upToken = new UsernamePasswordToken(username, new Md5Hash(password, md5Salt, 3).toString());
@@ -70,10 +70,10 @@ public class UserService {
             //调用登陆
             subject.login(upToken);
 
-            return new Result("登陆成功", sid);
+            return new Result<>("登陆成功", sid);
         }
         catch (Exception e) {
-            return new Result( WebStatus.USER_ERROR,"用户名或密码错误");
+            return new Result<>( WebStatus.USER_ERROR,"用户名或密码错误");
         }
     }
 
@@ -148,13 +148,12 @@ public class UserService {
     /**
      * ID是否存在
      */
-    public boolean verifyId(long id){
+    public void verifyId(long id){
         if(id==0){
             throw new CommonException(WebStatus.PARAM_ERROR,"ID不能为空");
         }
         if(!userDao.verifyId(id)){
             throw new CommonException(WebStatus.NOT_EXISTS,"ID不存在");
         }
-        return true;
     }
 }
