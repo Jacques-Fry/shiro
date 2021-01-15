@@ -1,5 +1,6 @@
 package com.jacques.shiro.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.jacques.shiro.entity.Result;
 import com.jacques.shiro.pojo.Permission;
 import com.jacques.shiro.service.PermissionService;
@@ -18,7 +19,7 @@ public class PermissionController {
     private PermissionService permissionService;
 
     @PostMapping("queryList")
-    public Result queryList(@RequestBody(required = false) Permission permission, @RequestParam int pageNum, @RequestParam int pageSize) {
-        return new Result("查询成功", permissionService.queryList(permission, pageNum, pageSize));
+    public Result<PageInfo<Permission>> queryList(@RequestBody(required = false) Permission permission, @RequestParam int pageNum, @RequestParam int pageSize) {
+        return new Result<>("查询成功", permissionService.queryList(permission, pageNum, pageSize));
     }
 }

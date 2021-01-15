@@ -1,5 +1,6 @@
 package com.jacques.shiro.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.jacques.shiro.entity.Result;
 import com.jacques.shiro.pojo.Role;
 import com.jacques.shiro.service.RoleService;
@@ -18,7 +19,7 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping("queryList")
-    public Result queryList(@RequestBody(required = false) Role role, @RequestParam int pageNum, @RequestParam int pageSize) {
-        return new Result("查询成功", roleService.queryList(role, pageNum, pageSize));
+    public Result<PageInfo<Role>> queryList(@RequestBody(required = false) Role role, @RequestParam int pageNum, @RequestParam int pageSize) {
+        return new Result<>("查询成功", roleService.queryList(role, pageNum, pageSize));
     }
 }

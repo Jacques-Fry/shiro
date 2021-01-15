@@ -1,5 +1,6 @@
 package com.jacques.shiro.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.jacques.shiro.entity.Result;
 import com.jacques.shiro.pojo.SysLog;
 import com.jacques.shiro.service.SysLogService;
@@ -19,7 +20,7 @@ public class SysLogController {
     private SysLogService sysLogService;
 
     @PostMapping("queryList")
-    public Result queryList(@RequestBody(required = false) SysLog sysLog, @RequestParam int pageNum, @RequestParam int pageSize) {
-        return new Result( "查询成功", sysLogService.queryList(sysLog, pageNum, pageSize));
+    public Result<PageInfo<SysLog>> queryList(@RequestBody(required = false) SysLog sysLog, @RequestParam int pageNum, @RequestParam int pageSize) {
+        return new Result<>( "查询成功", sysLogService.queryList(sysLog, pageNum, pageSize));
     }
 }

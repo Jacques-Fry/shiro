@@ -27,7 +27,7 @@ public class CommonException extends RuntimeException {
     this.msg = msg;
   }
 
-  public CommonException(Integer code, String msg) {
+  public CommonException(int code, String msg) {
     this.code = code;
     this.msg = msg;
   }

@@ -78,8 +78,6 @@ public class SysLogAspect {
         if (user != null) {
             sysLog.setUserId(user.getId() + "");
             sysLog.setUsername(user.getUsername());
-        }else{
-            sysLog.setUsername("");
         }
         //方法名
         sysLog.setMethod(methodName);
