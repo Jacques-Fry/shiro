@@ -7,6 +7,7 @@ import com.jacques.shiro.service.RoleService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 花落泪知雨
@@ -21,5 +22,10 @@ public class RoleController {
     @PostMapping("queryList")
     public Result<PageInfo<Role>> queryList(@RequestBody(required = false) Role role, @RequestParam int pageNum, @RequestParam int pageSize) {
         return new Result<>("查询成功", roleService.queryList(role, pageNum, pageSize));
+    }
+
+    @PostMapping("selectAll")
+    public Result<List<Role>> selectAll() {
+        return new Result<>("查询成功", roleService.selectAll());
     }
 }

@@ -4,21 +4,19 @@
 <mapper namespace="com.jacques.shiro.dao.UserDao">
 
     <select id="selectDetails" resultType="com.jacques.shiro.pojo.User">
-        SELECT
-          `username`,
-          `create_time`,
-          `status`,
-          `role_id`
-        FROM
-          `user`
+        SELECT `id`,
+               `username`,
+               `tel`,
+               `create_time`,
+               `status`,
+               `role_id`
+        FROM `user`
         WHERE `id` = #{id}
     </select>
 
     <select id="verifyId" resultType="boolean">
-        SELECT
-          1
-        FROM
-          `user`
+        SELECT 1
+        FROM `user`
         WHERE `id` = #{id}
     </select>
 </mapper>

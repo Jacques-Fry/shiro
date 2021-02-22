@@ -19,26 +19,28 @@ import java.util.List;
 @Transactional
 public class RoleService {
 
-    @Autowired
-    private RoleDao roleDao;
+  @Autowired private RoleDao roleDao;
 
-    /**
-     * 根据id查询角色
-     *
-     * @param id
-     */
-    public HashSet<String> findById(Integer id) {
-        System.out.println("==============执行了角色查询");
-        return roleDao.findById(id);
-    }
+  /**
+   * 根据id查询角色
+   *
+   * @param id
+   */
+  public HashSet<String> findById(Integer id) {
+    System.out.println("==============执行了角色查询");
+    return roleDao.findById(id);
+  }
 
-    /**
-     * 分页条件查询角色
-     */
-    public PageInfo<Role> queryList(Role role, int pageNum, int pageSize) {
-        String orderBy = "";
-        PageHelper.startPage(pageNum, pageSize, orderBy);
-        List<Role> roleList = roleDao.queryList(role, pageNum, pageSize);
-        return new PageInfo<>(roleList);
-    }
+  /** 分页条件查询角色 */
+  public PageInfo<Role> queryList(Role role, int pageNum, int pageSize) {
+    String orderBy = "";
+    PageHelper.startPage(pageNum, pageSize, orderBy);
+    List<Role> roleList = roleDao.queryList(role, pageNum, pageSize);
+    return new PageInfo<>(roleList);
+  }
+
+  /** 查询所有角色 */
+  public List<Role> selectAll() {
+    return roleDao.selectAll();
+  }
 }

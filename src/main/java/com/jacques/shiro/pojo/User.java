@@ -1,5 +1,6 @@
 package com.jacques.shiro.pojo;
 
+import com.github.liaochong.myexcel.core.annotation.ExcelColumn;
 import com.jacques.shiro.utils.fileUtil.ExcelAttribute;
 import org.crazycake.shiro.AuthCachePrincipal;
 
@@ -11,13 +12,19 @@ import java.util.Date;
  * @create 2019/12/23 14:19
  */
 public class User implements Serializable,AuthCachePrincipal{
+  @ExcelColumn(index = 0)
   @ExcelAttribute(sort = 0)
   private long id;
+  @ExcelColumn(index = 1)
   @ExcelAttribute(sort = 1)
   private String username;
   private String password;
+  @ExcelColumn(index = 2)
   @ExcelAttribute(sort = 2)
   private String tel;
+  /**
+   * 账号状态 (0:正常 | 1:已冻结)
+   */
   private String status;
   private Integer roleId;
   private Date createTime;

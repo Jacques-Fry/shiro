@@ -5,6 +5,6 @@ custom:
 shiro:
   auth:
     anon:
-      /user/login,/noLogin,/noAuth
+      /user/login,/user/export,/noLogin,/noAuth
     authc:
       /user/**,/permission/**,/role/**,/syslog/**

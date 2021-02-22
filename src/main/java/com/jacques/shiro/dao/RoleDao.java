@@ -33,4 +33,11 @@ public interface RoleDao {
           "WHERE `name` LIKE IFNULL(CONCAT('%',#{role.name},'%'),'%') " +
           "AND `nickname` LIKE IFNULL(CONCAT('%',#{role.nickname},'%'),'%') ")
   List<Role> queryList(@Param("role") Role role, int pageNum, int pageSize);
+
+  @Select("SELECT " +
+          "`id` ," +
+          "`name`," +
+          "`nickname`" +
+          "FROM `role` ")
+  List<Role> selectAll();
 }

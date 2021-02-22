@@ -23,8 +23,10 @@ public class ShiroLoginFilter extends FormAuthenticationFilter{
    */
   @Override
   protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+    System.out.println("进入shiro过滤器");
+
     if (request instanceof HttpServletRequest) {
-      if (((HttpServletRequest) request).getMethod().toUpperCase().equals("OPTIONS")) {
+      if ("OPTIONS".equalsIgnoreCase(((HttpServletRequest) request).getMethod())) {
         return true;
       }
     }
@@ -36,6 +38,8 @@ public class ShiroLoginFilter extends FormAuthenticationFilter{
    */
   @Override
   protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
+    System.out.println("未登录");
+
     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
     //这里是个坑，如果不设置的接受的访问源，那么前端都会报跨域错误，因为这里还没到corsConfig里面
     httpServletResponse.setHeader("Access-Control-Allow-Origin", ((HttpServletRequest) request).getHeader("Origin"));

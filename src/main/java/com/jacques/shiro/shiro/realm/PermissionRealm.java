@@ -46,6 +46,7 @@ public class PermissionRealm extends AuthorizingRealm {
     /**
      * 自定义realm名称
      */
+    @Override
     public void setName(String name) {
         super.setName("permissionRealm");
     }
@@ -56,6 +57,7 @@ public class PermissionRealm extends AuthorizingRealm {
      * principalCollection：包含了所有已认证的安全数据
      * AuthorizationInfoInfo：授权数据
      */
+    @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("执行授权方法");
         //1.获取安全数据
@@ -91,6 +93,7 @@ public class PermissionRealm extends AuthorizingRealm {
     //认证：认证的主要目的，比较用户名和密码是否与数据库中的一致
     //将安全数据存入到shiro进行保管
     //参数：authenticationToken登录构造的usernamepasswordtoken
+    @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("执行认证方法");
         //1.构造uptoken

@@ -2,10 +2,10 @@ spring:
   datasource:
       username: root
       password: root
-      url: jdbc:mysql://127.0.0.1:3306/common?characterEncoding=utf-8
+      url: jdbc:mysql://127.0.0.1:3306/gamelibrary?characterEncoding=utf-8
       driver-class-name: com.mysql.jdbc.Driver
   redis:
       host: 127.0.0.1
-      database: 2
+      database: 4
       port: 6379
       password:

@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=/favicon.ico><title>Jacques·Fry - 花落泪知雨</title><style type=text/css>#Loading {
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      -webkit-transform: translateY(-50%) translateX(-50%);
+      transform: translateY(-50%) translateX(-50%);
+      z-index: 100;
+    }
+
+    @-webkit-keyframes ball-beat {
+      50% {
+        opacity: 0.2;
+        -webkit-transform: scale(0.75);
+        transform: scale(0.75);
+      }
+
+      100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+
+    @keyframes ball-beat {
+      50% {
+        opacity: 0.2;
+        -webkit-transform: scale(0.75);
+        transform: scale(0.75);
+      }
+
+      100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+
+    .ball-beat>div {
+      background-color: #0090c9;
+      width: 15px;
+      height: 15px;
+      border-radius: 100% !important;
+      margin: 2px;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      display: inline-block;
+      -webkit-animation: ball-beat 0.7s 0s infinite linear;
+      animation: ball-beat 0.7s 0s infinite linear;
+    }
+
+    .ball-beat>div:nth-child(2n-1) {
+      -webkit-animation-delay: 0.35s !important;
+      animation-delay: 0.35s !important;
+    }</style><link href=/css/chunk-2953aa56.20702fbc.css rel=prefetch><link href=/css/chunk-2998b51f.ced6b366.css rel=prefetch><link href=/css/chunk-48ee9780.6934be8f.css rel=prefetch><link href=/css/chunk-6bdfa0b2.0de69882.css rel=prefetch><link href=/css/chunk-f987e09c.fd9f46e9.css rel=prefetch><link href=/js/chunk-2953aa56.ecb0619c.js rel=prefetch><link href=/js/chunk-2998b51f.3a52a603.js rel=prefetch><link href=/js/chunk-2d0ce764.24e665cd.js rel=prefetch><link href=/js/chunk-2d222024.8a620198.js rel=prefetch><link href=/js/chunk-48ee9780.eeb7a412.js rel=prefetch><link href=/js/chunk-6bdfa0b2.0783846d.js rel=prefetch><link href=/js/chunk-f987e09c.1c654a7b.js rel=prefetch><link href=/css/app.2d71dbad.css rel=preload as=style><link href=/css/chunk-vendors.6d3836b6.css rel=preload as=style><link href=/js/app.b0b567f8.js rel=preload as=script><link href=/js/chunk-vendors.fe8a7883.js rel=preload as=script><link href=/js/main.b8818f16.js rel=preload as=script><link href=/css/chunk-vendors.6d3836b6.css rel=stylesheet><link href=/css/app.2d71dbad.css rel=stylesheet></head><body><div id=Loading><div id=dong class="loader-inner ball-beat"><div></div><div></div><div></div></div><div id=loading-text style="text-align: center;">加载中</div></div><div id=app></div><script src=/js/chunk-vendors.fe8a7883.js></script><script src=/js/app.b0b567f8.js></script><script src=/js/main.b8818f16.js></script></body><script>(window.onload = function () {
+    setTimeout(() => {
+      document.getElementById("dong").classList.remove("loader-inner")
+      document.getElementById("dong").classList.remove("ball-beat")
+      document.getElementById("loading-text").style.display="none";
+    }, 50);
+  })()</script></html>

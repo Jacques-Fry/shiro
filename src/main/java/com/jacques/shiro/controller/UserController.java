@@ -5,10 +5,14 @@ import com.jacques.shiro.entity.Result;
 import com.jacques.shiro.log.sql.SqlLog;
 import com.jacques.shiro.pojo.User;
 import com.jacques.shiro.service.UserService;
+import com.jacques.shiro.utils.WebStatus;
 import com.jacques.shiro.utils.fileUtil.ExcelExportUtil;
 import com.jacques.shiro.utils.fileUtil.ExcelImportUtil;
+import com.jacques.shiro.utils.fileUtil.ExcelUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -46,49 +50,46 @@ public class UserController {
         return new Result<>("退出成功");
     }
 
+    @RequiresAuthentication
     @PostMapping("queryList")
     public Result<PageInfo<User>> queryList(@RequestBody(required = false) User user, @RequestParam int pageNum, @RequestParam int pageSize) {
         return new Result<>( "查询成功", userService.queryList(user, pageNum, pageSize));
     }
 
+    @RequiresAuthentication
     @GetMapping("details")
     public Result<User> details(){
         return new Result<>( "查询成功", userService.getUser());
     }
 
-    @GetMapping("selectDetails")
-    public Result<User> selectDetails(@RequestParam(defaultValue = "0")long id){
+    @RequiresAuthentication
+    @GetMapping("selectDetails/{id}")
+    public Result<User> selectDetails(@PathVariable(name = "id")long id){
         return new Result<>( "查询成功", userService.selectDetails(id));
     }
 
-    @SqlLog(operationName = "访问用户upd", operation = "user:upd")
-    @RequiresPermissions("user:upd")
-    @GetMapping("upd")
-    public Result<String> upd() {
-        return new Result<>( "访问upd成功");
-    }
-
-    //  @RequiresRoles("system")
     @SqlLog(operationName = "导入用户数据", operation = "user:import")
+    @RequiresRoles("system")
     @PostMapping("import")
-    public Result<String> importUser(MultipartFile file) throws IOException {
+    public Result<String> importUser(@RequestParam("file") MultipartFile file) throws IOException {
         if (file == null) {
-            return new Result<>("未传入文件");
+            return new Result<>(WebStatus.PARAM_ERROR,"未传入文件");
         }
-        List<User> userList = new ExcelImportUtil<User>(User.class).readExcel(file.getInputStream(), 1, 0);
+        List<User> userList = ExcelUtils.readExcel(file.getInputStream(),1,2,0,User.class);
         userService.saveUserList(userList);
         return new Result<>( "导入成功");
     }
 
+    @RequiresAuthentication
     @SqlLog(operationName = "导出用户数据", operation = "user:export")
-    @GetMapping("export")
-    public void exportUser(HttpServletResponse response) throws Exception {
+    @PostMapping("export")
+    public Result<String>  exportUser(HttpServletResponse response) throws Exception {
         List<User> users = userService.findAll();
         //加载模板
         Resource resource = new ClassPathResource("excel-template/user.xlsx");
         FileInputStream fis = new FileInputStream(resource.getFile());
         //通过工具类下载
         new ExcelExportUtil<User>(User.class, 1, 1).export(response, fis, users, "用户表数据.xlsx");
-
+        return new Result<>( "导出成功");
     }
 }

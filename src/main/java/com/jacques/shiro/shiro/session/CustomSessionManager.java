@@ -14,13 +14,18 @@ import java.io.Serializable;
  * @create 2019/12/24 14:14
  */
 public class CustomSessionManager extends DefaultWebSessionManager {
+  private static final String AUTHORIZATION = "Authorization";
 
+  @Override
   protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
-    String id = WebUtils.toHttp(request).getHeader("Authorization");
+    String id = WebUtils.toHttp(request).getHeader(AUTHORIZATION);
+    System.out.println("进入session管理器");
     if (StringUtils.isNotBlank(id)) {
-      request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, "header");//来源
+      // 来源
+      request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, "header");
       request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, id);
-      request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);//是否验证
+      // 是否验证
+      request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
       return id;
     } else {
       //没有生成新的sessionId

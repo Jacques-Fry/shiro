@@ -4,26 +4,36 @@
 <mapper namespace="com.jacques.shiro.dao.PermissionMapper">
 
     <select id="findByRoleId" resultType="String">
-        select p.name from permission p
-        left join role_permission rp on(rp.pid = p.id)
+        select p.name
+        from permission p
+                 left join role_permission rp on (rp.pid = p.id)
         where rp.rid = #{roleId}
     </select>
 
     <select id="queryList" resultType="com.jacques.shiro.pojo.Permission">
-        SELECT 
-          `id` ,
-          `url` ,
-          `name` ,
-          `nickname`
-          FROM `permission`
-          <where>
-              <if test="permission.name!='' and permission.name!=null">
-                  `name` LIKE CONCAT('%',#{permission.name},'%')
-              </if>
-              <if test="permission.nickname!='' and permission.nickname!=null">
-                  AND `nickname` LIKE CONCAT('%',#{permission.nickname},'%')
-              </if>
-          </where>
+        SELECT
+        `id` ,
+        `url` ,
+        `name` ,
+        `nickname`
+        FROM `permission`
+        <where>
+            <if test="permission.name!='' and permission.name!=null">
+                `name` LIKE CONCAT('%',#{permission.name},'%')
+            </if>
+            <if test="permission.nickname!='' and permission.nickname!=null">
+                AND `nickname` LIKE CONCAT('%',#{permission.nickname},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" resultType="com.jacques.shiro.pojo.Permission">
+        SELECT `id`,
+               `url`,
+               `name`,
+               `nickname`
+        FROM `permission`
+        WHERE id = #{id}
     </select>
 
 

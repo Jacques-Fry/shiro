@@ -1,5 +1,6 @@
 package com.jacques.shiro.utils.fileUtil;
 
+import com.github.liaochong.myexcel.core.DefaultExcelReader;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -7,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ExcelExportUtil<T> {
@@ -95,6 +98,7 @@ public class ExcelExportUtil<T> {
         response.setContentType("application/octet-stream");
         response.setHeader("content-disposition", "attachment;filename=" + new String(fileName.getBytes("ISO8859-1")));
         response.setHeader("filename", fileName);
+
         workbook.write(response.getOutputStream());
     }
 
@@ -105,4 +109,5 @@ public class ExcelExportUtil<T> {
         }
         return styles;
     }
+
 }

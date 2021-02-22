@@ -83,7 +83,7 @@ public interface UserDao {
     Integer countByUsername(@Param("username") String username);
 
 
-    @Insert("INSERT INTO `common`.`user` ( " +
+    @Insert("INSERT INTO `user` ( " +
             "  `id`, " +
             "  `username`, " +
             "  `password`, " +

@@ -20,4 +20,6 @@ public interface PermissionMapper {
   HashSet<String> findByRoleId(@Param("roleId") Integer roleId);
 
   List<Permission> queryList(@Param("permission") Permission permission, int pageNum, int pageSize);
+
+  Permission findById(@Param("id") int id);
 }

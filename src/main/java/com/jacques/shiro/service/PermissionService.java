@@ -23,7 +23,7 @@ public class PermissionService {
   private PermissionMapper permissionMapper;
 
   /**
-   * 根据ID查询权限
+   * 根据角色ID查询权限
    * @param roleId
    */
   public HashSet<String> findByRoleId(Integer roleId){
@@ -38,5 +38,12 @@ public class PermissionService {
     PageHelper.startPage(pageNum, pageSize, orderBy);
     List<Permission> permissionList = permissionMapper.queryList(permission, pageNum, pageSize);
     return new PageInfo<>(permissionList);
+  }
+
+  /**
+   * 根据ID查询
+   */
+  public Permission findById(int id){
+    return permissionMapper.findById(id);
   }
 }

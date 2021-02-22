@@ -22,4 +22,9 @@ public class PermissionController {
     public Result<PageInfo<Permission>> queryList(@RequestBody(required = false) Permission permission, @RequestParam int pageNum, @RequestParam int pageSize) {
         return new Result<>("查询成功", permissionService.queryList(permission, pageNum, pageSize));
     }
+
+    @GetMapping("details/{id}")
+    public Result<Permission> queryList(@PathVariable(name = "id") int id) {
+        return new Result<>("查询成功", permissionService.findById(id));
+    }
 }
