@@ -14,7 +14,7 @@
         WHERE `id` = #{id}
     </select>
 
-    <select id="verifyId" resultType="boolean">
+    <select id="verifyId" resultType="Boolean">
         SELECT 1
         FROM `user`
         WHERE `id` = #{id}
